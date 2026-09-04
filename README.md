@@ -80,7 +80,7 @@ API runs on `http://localhost:5000`.
 - PATCH `/api/donations/:id/cancel`
 
 ### Claims
-- POST `/api/donations/:id/claim`
+- POST `/api/claims/:id`
 - GET `/api/claims/my`
 
 ### Pickups
@@ -97,7 +97,7 @@ API runs on `http://localhost:5000`.
   "foodName": "Vegetable Biryani",
   "category": "Cooked Meals",
   "quantity": 40,
-  "locationId": 1,
+  "locationId": 4,
   "preparedAt": "2026-09-04T14:00:00Z",
   "expiryAt": "2026-09-04T18:00:00Z"
 }
