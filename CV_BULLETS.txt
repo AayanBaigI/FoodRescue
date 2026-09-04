@@ -1,4 +1,0 @@
-FoodRescue | Node.js, Express.js, PostgreSQL, JWT
-• Built a RESTful backend for redistributing surplus food from providers to NGOs/volunteers, covering donation listing, claiming, pickup assignment and expiry tracking.
-• Designed a normalized PostgreSQL schema with relational constraints and indexes, and implemented JWT authentication with role-based authorization.
-• Implemented transaction-based donation claiming with row-level locking to prevent race conditions and inconsistent inventory during concurrent claims.
