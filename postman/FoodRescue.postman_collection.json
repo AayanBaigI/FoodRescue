@@ -1,0 +1,121 @@
+{
+  "info": {
+    "name": "FoodRescue API",
+    "_postman_id": "foodrescue-mvp-001",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:5000"},
+    {"key": "providerToken", "value": ""},
+    {"key": "ngoToken", "value": ""},
+    {"key": "volunteerToken", "value": ""},
+    {"key": "donationId", "value": "1"},
+    {"key": "claimId", "value": "1"},
+    {"key": "pickupId", "value": "1"}
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {"method": "GET", "url": "{{baseUrl}}/api/health"}
+    },
+    {
+      "name": "Register Provider",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"name\":\"Provider One\",\"email\":\"provider1@example.com\",\"password\":\"password123\",\"role\":\"PROVIDER\"}"},
+        "url": "{{baseUrl}}/api/auth/register"
+      }
+    },
+    {
+      "name": "Register NGO",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"name\":\"NGO One\",\"email\":\"ngo1@example.com\",\"password\":\"password123\",\"role\":\"NGO\"}"},
+        "url": "{{baseUrl}}/api/auth/register"
+      }
+    },
+    {
+      "name": "Login Provider",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"email\":\"provider1@example.com\",\"password\":\"password123\"}"},
+        "url": "{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Login NGO",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"email\":\"ngo1@example.com\",\"password\":\"password123\"}"},
+        "url": "{{baseUrl}}/api/auth/login"
+      }
+    },
+    {
+      "name": "Create Donation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{providerToken}}"}
+        ],
+        "body": {"mode": "raw", "raw": "{\"foodName\":\"Vegetable Biryani\",\"category\":\"Cooked Meals\",\"quantity\":40,\"locationId\":1,\"preparedAt\":\"2026-09-04T14:00:00Z\",\"expiryAt\":\"2026-09-04T18:00:00Z\"}"},
+        "url": "{{baseUrl}}/api/donations"
+      }
+    },
+    {
+      "name": "List Available Donations",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/donations"
+      }
+    },
+    {
+      "name": "Claim Donation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{ngoToken}}"}
+        ],
+        "body": {"mode": "raw", "raw": "{\"quantity\":10}"},
+        "url": "{{baseUrl}}/api/donations/{{donationId}}/claim"
+      }
+    },
+    {
+      "name": "My Claims",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{ngoToken}}"}],
+        "url": "{{baseUrl}}/api/claims/my"
+      }
+    },
+    {
+      "name": "Assign Pickup",
+      "request": {
+        "method": "POST",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{ngoToken}}"}
+        ],
+        "body": {"mode": "raw", "raw": "{\"volunteerId\":3,\"pickupTime\":\"2026-09-04T17:00:00Z\"}"},
+        "url": "{{baseUrl}}/api/claims/{{claimId}}/pickup"
+      }
+    },
+    {
+      "name": "Update Pickup Status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          {"key": "Content-Type", "value": "application/json"},
+          {"key": "Authorization", "value": "Bearer {{volunteerToken}}"}
+        ],
+        "body": {"mode": "raw", "raw": "{\"status\":\"PICKED_UP\"}"},
+        "url": "{{baseUrl}}/api/pickups/{{pickupId}}/status"
+      }
+    }
+  ]
+}
